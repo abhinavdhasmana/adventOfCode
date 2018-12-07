@@ -1,3 +1,19 @@
+const findDuplicateFrequency = (input) => {
+  let frequencySum = 0;
+  const frequenciesAcheived = {};
+  frequenciesAcheived[0] = true;
+  for (let i = 0; i < input.length; i += 1) {
+    frequencySum += input[i];
+    if (frequenciesAcheived[frequencySum]) {
+      return frequencySum;
+    }
+    frequenciesAcheived[frequencySum] = true;
+    if (i === (input.length - 1)) {
+      i = -1;
+    }
+  }
+  return null;
+};
 const input = [-4,
   +7,
   +3,
@@ -965,5 +981,8 @@ const input = [-4,
   -119289];
 
 
-const result = input.reduce((acc, val) => acc + val);
-console.log(result);
+// const input2 = [+3, +3, +4, -2, -4];
+// const input3 = [-6, +3, +8, +5, -6];
+// const input4 = [1, -1];
+// const input5 = [+7, +7, -2, -7, -4];
+console.log(findDuplicateFrequency(input));
