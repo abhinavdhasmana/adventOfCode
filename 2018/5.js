@@ -32,5 +32,6 @@ input.forEach((val) => {
   const [startingCoordinates, size] = parseInput(val);
   hash = applyInput(startingCoordinates, size, hash);
 });
+console.log(hash);
 const total = collidingArea(hash);
 console.log(total);
