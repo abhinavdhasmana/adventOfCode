@@ -8,26 +8,29 @@ const parseInput = (inputString) => {
 };
 
 const applyInput = (startingCoordinates, size, hash) => {
+  const localHash = hash;
   for (let i = 0; i < size[1]; i += 1) {
     const row = parseInt(startingCoordinates[1], 10) + i;
     for (let j = 1; j <= size[0]; j += 1) {
       const column = parseInt(startingCoordinates[0], 10) + j;
-      hash[`${row},${column}`] = hash[`${row},${column}`] ? hash[`${row},${column}`] + 1 : 1;
+      localHash[`${row},${column}`] = localHash[`${row},${column}`] ? localHash[`${row},${column}`] + 1 : 1;
     }
   }
+  return localHash;
 };
 
 const collidingArea = hash => Object.values(hash).reduce((acc, val) => {
+  let tempAcc = acc;
   if (val > 1) {
-    acc += 1;
+    tempAcc += 1;
   }
-  return acc;
+  return tempAcc;
 }, 0);
 
-const hash = {};
+let hash = {};
 input.forEach((val) => {
   const [startingCoordinates, size] = parseInput(val);
-  applyInput(startingCoordinates, size, hash);
+  hash = applyInput(startingCoordinates, size, hash);
 });
 const total = collidingArea(hash);
 console.log(total);
